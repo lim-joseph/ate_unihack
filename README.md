@@ -2,7 +2,7 @@
 
 ### Installation
 
-Prerequisites: unix cli, npm
+Prerequisites: unix cli, npm, git
 
 1. Clone the repo
     ```sh
@@ -30,7 +30,7 @@ Prerequisites: unix cli, npm
     ```
     pip install -r src/flask-server/req.txt
     ```
-8. Run the flask server (unix)
+8. Run the flask server
     ```
     python3 src/flask-server/server.py
     ```
