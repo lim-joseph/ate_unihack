@@ -50,25 +50,29 @@ def merge_timeblock(timetableList) -> list:
     mergedIncrementTimeblock = []
     for index,element in enumerate(mergedTimeblock):
         if index % 2 == 0:
-            for num in range(int(((mergedTimeblock[index+1]-mergedTimeblock[index])*2)+1)):
-                mergedIncrementTimeblock.append(mergedTimeblock[index]+num/2)
+            for num in range(int((mergedTimeblock[index+1]-mergedTimeblock[index])/0.5)+1):
+                if num == 0:
+                    pass
+                elif num == int((mergedTimeblock[index+1]-mergedTimeblock[index])*2):
+                    pass
+                else:
+                    mergedIncrementTimeblock.append(mergedTimeblock[index]+num/2)
 
     return mergedIncrementTimeblock
 
 def find_freeblock(mergedTimeblock):
     validTimeDoubled = list(range(2*int(START_TIME),2*int(END_TIME),1))
     validTime = list(np.divide(validTimeDoubled,2))
-    diffTime = [time for time in validTime if time not in mergedTimeblock]
-    return diffTime
-
+    freeblockList = [time for time in validTime if time not in mergedTimeblock]
+    return freeblockList
 
 def main():
     lastDate = None
-    datetimeList = {}
+    freetimeList = {}
     tempList = []
     
     # link from allocate+
-    url = "https://my-timetable.monash.edu/even/rest/calendar/ical/a1df181d-05a3-4719-b029-bddb5f79e676"
+    url = "https://my-timetable.monash.edu/even/rest/calendar/ical/fc0d8661-03f7-4a66-ac97-879948ed28e3"
     cal = Calendar(requests.get(url).text)
     currentDate = date.today()
     boundaryDate = currentDate + timedelta(days=7*DISPLAY_WEEK)
@@ -88,22 +92,24 @@ def main():
             break
         
         if not(lastDate is None) and str(eventBeginDate) != lastDate:
-           datetimeList[lastDate] = merge_timeblock(tempList)
+           freetimeList[lastDate] = merge_timeblock(tempList)
            tempList = []
+           
 
         tempList.append(BeginTimeFloat)
         tempList.append(EndTimeFloat)
         lastDate = str(eventBeginDate)
-    return datetimeList
+        
+    return freetimeList
 
         # print(event.name)
         # print(event.location)
         # print(event.duration)
         # print(event.begin) 
 
-# print(main())
-test =[15.0, 18.0]
-print(find_freeblock(test))
+print(main())
+
+
 # if __name__ == "__main":
 #     print("hello")
 #     main()
