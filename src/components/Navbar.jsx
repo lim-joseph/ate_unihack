@@ -7,12 +7,11 @@ import {
 	Link,
 	Button,
 } from "@nextui-org/react";
-
 import "../index.css";
 
 export default function App() {
 	return (
-		<Navbar>
+		<Navbar className="border-b-1 drop-shadow-sm bg-white">
 			<NavbarBrand>
 				<p className="font-bold text-inherit">ALLOCATE+ PLUS</p>
 			</NavbarBrand>

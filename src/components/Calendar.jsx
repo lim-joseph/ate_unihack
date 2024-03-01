@@ -1,11 +1,4 @@
-import { Fragment, useEffect, useRef } from "react";
-import {
-	ChevronDownIcon,
-	ChevronLeftIcon,
-	ChevronRightIcon,
-	EllipsisHorizontalIcon,
-} from "@heroicons/react/20/solid";
-import { Menu, Transition } from "@headlessui/react";
+import { useEffect, useRef } from "react";
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
@@ -28,13 +21,7 @@ export default function Calendar() {
 	}, []);
 
 	return (
-		<div className="flex w-[80svw] mx-auto h-full flex-col">
-			<header className="flex flex-none items-center justify-between border-b border-gray-200 px-6 py-4">
-				<h1 className="text-base font-semibold leading-6 text-white">
-					<time dateTime="2022-01">January 2022</time>
-				</h1>
-			</header>
-
+		<div className="flex w-[80svw] mx-auto h-full flex-col mt-12">
 			<div
 				ref={container}
 				className="isolate flex flex-auto flex-col overflow-auto bg-white"
@@ -43,117 +30,34 @@ export default function Calendar() {
 					style={{ width: "165%" }}
 					className="flex max-w-full flex-none flex-col sm:max-w-none md:max-w-full"
 				>
+					{/* DAY OF THE WEEK */}
 					<div
 						ref={containerNav}
 						className="sticky top-0 z-30 flex-none bg-white shadow ring-1 ring-black ring-opacity-5 sm:pr-8 "
 					>
-						<div className="grid grid-cols-5 text-sm leading-6 text-gray-500 sm:hidden">
-							<button
-								type="button"
-								className="flex flex-col items-center pb-3 pt-2"
-							>
-								M{" "}
-								<span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">
-									10
-								</span>
-							</button>
-							<button
-								type="button"
-								className="flex flex-col items-center pb-3 pt-2"
-							>
-								T{" "}
-								<span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">
-									11
-								</span>
-							</button>
-							<button
-								type="button"
-								className="flex flex-col items-center pb-3 pt-2"
-							>
-								W{" "}
-								<span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">
-									12
-								</span>
-							</button>
-							<button
-								type="button"
-								className="flex flex-col items-center pb-3 pt-2"
-							>
-								T{" "}
-								<span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">
-									13
-								</span>
-							</button>
-							<button
-								type="button"
-								className="flex flex-col items-center pb-3 pt-2"
-							>
-								F{" "}
-								<span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">
-									14
-								</span>
-							</button>
-							<button
-								type="button"
-								className="flex flex-col items-center pb-3 pt-2"
-							>
-								S{" "}
-								<span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">
-									15
-								</span>
-							</button>
-							<button
-								type="button"
-								className="flex flex-col items-center pb-3 pt-2"
-							>
-								S{" "}
-								<span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">
-									16
-								</span>
-							</button>
-						</div>
-
 						<div className="-mr-px hidden grid-cols-5 divide-x divide-gray-100 border-r border-gray-100 text-sm leading-6 text-gray-500 sm:grid">
 							<div className="col-end-1 w-14" />
 							<div className="flex items-center justify-center py-3">
 								<span>
 									Mon{" "}
-									<span className="items-center justify-center font-semibold text-gray-900">
+									{/* <span className="items-center justify-center font-semibold text-gray-900">
 										10
-									</span>
+									</span> */}
 								</span>
 							</div>
 							<div className="flex items-center justify-center py-3">
-								<span>
-									Tue{" "}
-									<span className="items-center justify-center font-semibold text-gray-900">
-										11
-									</span>
-								</span>
+								<span>Tue </span>
 							</div>
 							<div className="flex items-center justify-center py-3">
 								<span className="flex items-baseline">
 									Wed{" "}
-									<span className="ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white">
-										12
-									</span>
 								</span>
 							</div>
 							<div className="flex items-center justify-center py-3">
-								<span>
-									Thu{" "}
-									<span className="items-center justify-center font-semibold text-gray-900">
-										13
-									</span>
-								</span>
+								<span>Thu </span>
 							</div>
 							<div className="flex items-center justify-center py-3">
-								<span>
-									Fri{" "}
-									<span className="items-center justify-center font-semibold text-gray-900">
-										14
-									</span>
-								</span>
+								<span>Fri </span>
 							</div>
 						</div>
 					</div>
@@ -341,7 +245,7 @@ export default function Calendar() {
 							>
 								<li
 									className="relative mt-px flex sm:col-start-3"
-									style={{ gridRow: "74 / span 12" }}
+									style={{ gridRow: "14 / span 12" }}
 								>
 									<a
 										href="#"
@@ -353,42 +257,6 @@ export default function Calendar() {
 										<p className="text-blue-500 group-hover:text-blue-700">
 											<time dateTime="2022-01-12T06:00">
 												6:00 AM
-											</time>
-										</p>
-									</a>
-								</li>
-								<li
-									className="relative mt-px flex sm:col-start-3"
-									style={{ gridRow: "92 / span 30" }}
-								>
-									<a
-										href="#"
-										className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-pink-50 p-2 text-xs leading-5 hover:bg-pink-100"
-									>
-										<p className="order-1 font-semibold text-pink-700">
-											Flight to Paris
-										</p>
-										<p className="text-pink-500 group-hover:text-pink-700">
-											<time dateTime="2022-01-12T07:30">
-												7:30 AM
-											</time>
-										</p>
-									</a>
-								</li>
-								<li
-									className="relative mt-px hidden sm:col-start-6 sm:flex"
-									style={{ gridRow: "122 / span 24" }}
-								>
-									<a
-										href="#"
-										className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-gray-100 p-2 text-xs leading-5 hover:bg-gray-200"
-									>
-										<p className="order-1 font-semibold text-gray-700">
-											Meeting with design team at Disney
-										</p>
-										<p className="text-gray-500 group-hover:text-gray-700">
-											<time dateTime="2022-01-15T10:00">
-												10:00 AM
 											</time>
 										</p>
 									</a>
