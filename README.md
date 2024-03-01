@@ -4,8 +4,6 @@
 
 Prerequisites (UNIX ONLY): npm, git, python
 
-Install npm: https://www.theodinproject.com/lessons/foundations-installing-node-js
-
 1. Clone the repo
     ```sh
     git clone https://github.com/lim-joseph/ate_unihack.git
@@ -26,11 +24,12 @@ Install npm: https://www.theodinproject.com/lessons/foundations-installing-node-
 
 6. Activate python environment
     ```
-    source src/flask-server/venv/bin/activate
+    cd src/flask-server
+    source /venv/bin/activate
     ```
 7. Install python packages
     ```
-    pip install -r src/flask-server/req.txt
+    pip install -r req.txt
     ```
 8. Run the flask server
     ```
