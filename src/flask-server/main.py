@@ -55,7 +55,7 @@ def main():
         if eventBeginDate > boundaryDate:
             break
 
-        return_dict[str(eventBeginDate)] =[str(event.duration)]
+        return_dict["members"] =[str(eventBeginDate),str(event.duration),currentDate]
         return return_dict
         # if not(lastestDate is None) and lastestDate == str(eventBeginDate):
         #     return_dict[str(eventBeginDate)] = 
@@ -69,4 +69,5 @@ def main():
 
 if __name__ == "__main":
     print(main())
+    print("hellow")
 
