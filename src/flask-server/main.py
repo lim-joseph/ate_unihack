@@ -6,6 +6,24 @@ DISPLAY_WEEK = 2
 START_TIME = 8 #8AM
 END_TIME = 20 #8PM
 
+# {
+#     members: [
+#         {
+#             weekday: "mon",
+#             date: "2024-03-04",
+#             start:"3:00:00",
+#             end: "6:00:00",
+#             duration:"3"
+#             },
+#         {
+#             date: "2024-03-04",
+#             start:"7:00:00",
+#             end: "8:00:00",
+#             duration:"1"
+#             },
+#     ]
+# }
+
 #iso format: YYYY-MM-DD"T"hh:mm:ss"+"{UTC-zone}
 def get_date(isoTime):
     dateList = isoTime.split("T")[0].split("-")
@@ -49,5 +67,6 @@ def main():
         # print(get_time(str(event.begin))) 
         # print(eventBeginDate)
 
+if __name__ == "__main":
+    print(main())
 
-print(main())
