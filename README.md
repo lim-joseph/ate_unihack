@@ -2,7 +2,9 @@
 
 ### Installation
 
-Prerequisites: unix cli, npm, git
+Prerequisites (UNIX ONLY): npm, git
+
+Install npm: https://www.theodinproject.com/lessons/foundations-installing-node-js
 
 1. Clone the repo
     ```sh
