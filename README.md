@@ -24,7 +24,7 @@ Install npm: https://www.theodinproject.com/lessons/foundations-installing-node-
     ```
 5. Open a new terminal in the repo directory
 
-6. Activate python environment (unix)
+6. Activate python environment
     ```
     source src/flask-server/venv/bin/activate
     ```
