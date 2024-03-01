@@ -2,7 +2,7 @@
 
 ### Installation
 
-Prerequisites (UNIX ONLY): npm, git
+Prerequisites (UNIX ONLY): npm, git, python
 
 Install npm: https://www.theodinproject.com/lessons/foundations-installing-node-js
 
@@ -32,7 +32,7 @@ Install npm: https://www.theodinproject.com/lessons/foundations-installing-node-
     ```
     pip install -r src/flask-server/req.txt
     ```
-8. Run the flask server
+8. Run the flask server (dont need to open in browser)
     ```
     python3 src/flask-server/server.py
     ```
