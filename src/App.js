@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+import "./index.css";
 
 function App() {
 	const [data, setData] = useState({});
@@ -15,7 +15,7 @@ function App() {
 
 	return (
 		<div>
-			<p>Hello world</p>
+			<p className="bg-red-500">Hello world</p>
 			{typeof data.members === "undefined" ? (
 				<p>Loading...</p>
 			) : (
