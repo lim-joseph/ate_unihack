@@ -29,7 +29,7 @@ export default function App() {
 				</NavbarItem>
 				<NavbarItem>
 					<Link color="foreground" href="#">
-						Integrations
+						Repository
 					</Link>
 				</NavbarItem>
 			</NavbarContent>
