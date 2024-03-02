@@ -3,24 +3,30 @@ import requests
 from datetime import datetime,date,timedelta
 
 DISPLAY_WEEK = 2
-START_TIME = 8 #8AM
-END_TIME = 20 #8PM
+START_TIME = 8.0 #8AM
+END_TIME = 20.0 #8PM
 
 # {
-#     members: [
+#     weeks: [
 #         {
+#            {
 #             weekday: "mon",
 #             date: "2024-03-04",
 #             start:"3:00:00",
 #             end: "6:00:00",
 #             duration:"3"
-#             },
-#         {
-#             date: "2024-03-04",
 #             start:"7:00:00",
 #             end: "8:00:00",
 #             duration:"1"
 #             },
+#         {
+#             weekday: "tue"
+#             date: "2024-03-05",
+#             start:"11:00:00",
+#             end: "12:00:00",
+#             duration:"1"
+#             },
+#
 #     ]
 # }
 
@@ -31,42 +37,57 @@ def get_date(isoTime):
 
 def get_time(isoTime):
     utcTime = isoTime.split("T")[1]
-    return utcTime.split("+")[0]
+    timeList = utcTime.split("+")[0].split(":")
+    # get hour and minute in float
+    return float(timeList[0]+"."+timeList[1])
+
+def find_free_slot(timetableList):
+    pass
+    # for i in range(len(timetableList)):
+    #     if lastEndTime == timetableList[i][1]:
+    #     lastEndTime = timetableList[i][1]
 
 def main():
-    lastestDate = None
-    return_dict = {}
+    lastDate = None
+    datetimeList = {}
+    tempList = []
+    
     # link from allocate+
     url = "https://my-timetable.monash.edu/even/rest/calendar/ical/a1df181d-05a3-4719-b029-bddb5f79e676"
     cal = Calendar(requests.get(url).text)
     currentDate = date.today()
     boundaryDate = currentDate + timedelta(days=7*DISPLAY_WEEK)
-
+    
     for event in list(cal.timeline):
         eventBeginDateList = get_date(str(event.begin))
-
         eventBeginDate = date(eventBeginDateList[0],
                             eventBeginDateList[1],
                             eventBeginDateList[2])
+        BeginTimeFloat = get_time(str(event.begin))
+        EndTimeFloat = get_time(str(event.end))
         # ignore the past dates
         if eventBeginDate < currentDate:
             continue
         # also ignore the dates more the set week
         if eventBeginDate > boundaryDate:
             break
+        
+        if not(lastDate is None) and str(eventBeginDate) != lastDate:
+           datetimeList[lastDate] = tempList
+           tempList = []
 
-        return_dict[str(eventBeginDate)] =[str(event.duration)]
-        return return_dict
-        # if not(lastestDate is None) and lastestDate == str(eventBeginDate):
-        #     return_dict[str(eventBeginDate)] = 
-        # lastestDate = str(eventBeginDate)
+        tempList.append(BeginTimeFloat)
+        tempList.append(EndTimeFloat)
+        lastDate = str(eventBeginDate)
+    return datetimeList
 
         # print(event.name)
         # print(event.location)
         # print(event.duration)
-        # print(get_time(str(event.begin))) 
-        # print(eventBeginDate)
+        # print(event.begin) 
 
-if __name__ == "__main":
-    print(main())
+print(main())
+# if __name__ == "__main":
+#     print("hello")
+#     main()
 
