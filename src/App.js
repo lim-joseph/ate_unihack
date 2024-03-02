@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./index.css";
-import NavBar from "./components/nav_bar";
+import Navbar from "./components/Navbar.jsx";
+import HomeHero from "./components/HomeHero.jsx";
 
 function App() {
 	const [data, setData] = useState({});
@@ -15,8 +16,9 @@ function App() {
 	}, []);
 
 	return (
-		<div>
-			<p className="bg-red-500">Hello world</p>
+		<div className="min-h-svh">
+			<Navbar />
+			<HomeHero />
 			{typeof data.members === "undefined" ? (
 				<p>Loading...</p>
 			) : (
