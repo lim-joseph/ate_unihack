@@ -9,11 +9,18 @@ import {
 } from "@nextui-org/react";
 import "../index.css";
 
-export default function App() {
+export default function App({ setShowCalendar }) {
 	return (
-		<Navbar className="border-b-1 drop-shadow-sm bg-white">
+		<Navbar className="border-b-1 drop-shadow-sm bg-white hover:cursor-pointer">
 			<NavbarBrand>
-				<p className="font-bold text-inherit">ALLOCATE+ PLUS</p>
+				<a
+					className="font-bold text-inherit"
+					onClick={() => {
+						setShowCalendar(false);
+					}}
+				>
+					ALLOCATE+ PLUS
+				</a>
 			</NavbarBrand>
 			<NavbarContent className="hidden sm:flex gap-4" justify="center">
 				<NavbarItem>
@@ -34,10 +41,12 @@ export default function App() {
 			</NavbarContent>
 			<NavbarContent justify="end">
 				<NavbarItem className="hidden lg:flex">
-					<Link href="#">Login</Link>
+					<Link href="#" color="danger">
+						Login
+					</Link>
 				</NavbarItem>
 				<NavbarItem>
-					<Button as={Link} color="primary" href="#" variant="flat">
+					<Button as={Link} color="danger" href="#" variant="flat">
 						Sign Up
 					</Button>
 				</NavbarItem>

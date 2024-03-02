@@ -19,7 +19,7 @@ function App() {
 
 	return (
 		<div className="min-h-svh">
-			<Navbar />
+			<Navbar setShowCalendar={setShowCalendar} />
 
 			{!showCalendar ? (
 				<HomeHero
