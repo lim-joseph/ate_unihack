@@ -46,7 +46,14 @@ def merge_timeblock(timetableList) -> list:
     #Output the block of time they are in classes
     mergedTimeblock = set([num for index, num in enumerate(timetableList) if index > 0 and num == timetableList[index-1]])
     mergedTimeblock = sorted(list(set(timetableList) - mergedTimeblock))
-    return mergedTimeblock
+
+    mergedIncrementTimeblock = []
+    for index,element in enumerate(mergedTimeblock):
+        if index % 2 == 0:
+            for num in range(int(((mergedTimeblock[index+1]-mergedTimeblock[index])*2)+1)):
+                mergedIncrementTimeblock.append(mergedTimeblock[index]+num/2)
+
+    return mergedIncrementTimeblock
 
 def find_freeblock(mergedTimeblock):
     validTimeDoubled = list(range(2*int(START_TIME),2*int(END_TIME),1))
