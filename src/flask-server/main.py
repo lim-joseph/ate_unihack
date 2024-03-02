@@ -42,10 +42,11 @@ def get_time(isoTime):
     # get hour and minute in float
     return float(timeList[0]+"."+timeList[1])
 
-def merge_timeblock(timetableList):
+def merge_timeblock(timetableList) -> list:
     #Output the block of time they are in classes
-    final = set([num for index, num in enumerate(timetableList) if index > 0 and num == timetableList[index-1]])
-    final = sorted(list(set(timetableList) - final))
+    mergedTimeblock = set([num for index, num in enumerate(timetableList) if index > 0 and num == timetableList[index-1]])
+    mergedTimeblock = sorted(list(set(timetableList) - mergedTimeblock))
+    return mergedTimeblock
 
 def find_freeblock(mergedTimeblock):
     validTimeDoubled = list(range(2*int(START_TIME),2*int(END_TIME),1))
