@@ -19,7 +19,7 @@ export default function App({ setShowCalendar }) {
 						setShowCalendar(false);
 					}}
 				>
-					ALLOCATE+ PLUS
+					ALLODATE+ &lt;3
 				</a>
 			</NavbarBrand>
 			<NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -29,17 +29,17 @@ export default function App({ setShowCalendar }) {
 					</Link>
 				</NavbarItem>
 				<NavbarItem isActive>
-					<Link href="#" aria-current="page">
+					<Link href="/" aria-current="page">
 						Main
 					</Link>
 				</NavbarItem>
 				<NavbarItem>
-					<Link color="foreground" href="#">
+					<Link color="foreground" href="https://github.com/lim-joseph/ate_unihack" target="_blank">
 						Repository
 					</Link>
 				</NavbarItem>
 			</NavbarContent>
-			<NavbarContent justify="end">
+			{/* <NavbarContent justify="end">
 				<NavbarItem className="hidden lg:flex">
 					<Link href="#" color="danger">
 						Login
@@ -50,7 +50,7 @@ export default function App({ setShowCalendar }) {
 						Sign Up
 					</Button>
 				</NavbarItem>
-			</NavbarContent>
+			</NavbarContent> */}
 		</Navbar>
 	);
 }
