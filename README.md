@@ -32,7 +32,7 @@ Install npm: https://www.theodinproject.com/lessons/foundations-installing-node-
     ```
     pip install -r src/flask-server/req.txt
     ```
-8. Run the flask server (dont need to open in browser)
+8. Run the flask server
     ```
-    python3 src/flask-server/server.py
+    flask run
     ```
