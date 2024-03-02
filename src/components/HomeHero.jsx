@@ -1,7 +1,7 @@
 import "../index.css";
 import { Button } from "@nextui-org/react";
 import Hearts from "../assets/hearts.png";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 
 export default function HomeHero({
 	setShowTimetable,
