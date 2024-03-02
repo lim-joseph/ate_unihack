@@ -1,9 +1,9 @@
 import Navbar from "../components/Navbar";
 
-export default function About() {
+export default function About({ setShowCalendar }) {
 	return (
 		<>
-			<Navbar />
+			<Navbar setShowCalendar={{ setShowCalendar }} />
 			Hello world!
 		</>
 	);
