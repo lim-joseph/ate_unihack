@@ -12,7 +12,7 @@ export default function Event({
 		>
 			<a
 				href="#"
-				className={`group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-${bgColor}-50 p-2 text-xs leading-5 hover:bg-red-100`}
+				className={`group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-${bgColor}-50 p-2 text-xs leading-5 hover:bg-${bgColor}-100`}
 			>
 				<p className={`order-1 font-semibold text-${bgColor}-700`}>
 					{eventName}

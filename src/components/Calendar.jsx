@@ -213,7 +213,7 @@ export default function Calendar() {
 									colStart={3}
 									gridRow1={12}
 									span={10}
-									bgColor={"red"}
+									bgColor={"rose"}
 									eventName={"test"}
 								/>
 							</ol>
