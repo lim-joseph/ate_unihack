@@ -14,7 +14,7 @@ export default function App() {
 	return (
 		<Navbar>
 			<NavbarBrand>
-				<p className="font-bold text-inherit">ALLOCATE++</p>
+				<p className="font-bold text-inherit">ALLOCATE+ PLUS</p>
 			</NavbarBrand>
 			<NavbarContent className="hidden sm:flex gap-4" justify="center">
 				<NavbarItem>
