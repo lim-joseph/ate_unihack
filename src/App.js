@@ -16,7 +16,6 @@ function App() {
 
 	return (
 		<div>
-			<NavBar></NavBar>
 			<p className="bg-red-500">Hello world</p>
 			{typeof data.members === "undefined" ? (
 				<p>Loading...</p>
