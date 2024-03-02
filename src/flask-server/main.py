@@ -50,7 +50,7 @@ def merge_timeblock(timetableList) -> list:
     mergedIncrementTimeblock = []
     for index,element in enumerate(mergedTimeblock):
         if index % 2 == 0:
-            for num in range(int(((mergedTimeblock[index+1]-mergedTimeblock[index])/0.5)+1)):
+            for num in range(int((mergedTimeblock[index+1]-mergedTimeblock[index])/0.5)+1):
                 if num == 0:
                     pass
                 elif num == int((mergedTimeblock[index+1]-mergedTimeblock[index])*2):
