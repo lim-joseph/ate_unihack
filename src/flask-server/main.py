@@ -62,14 +62,13 @@ def find_freeblock(mergedTimeblock):
     freeblockList = [time for time in validTime if time not in mergedTimeblock]
     return freeblockList
 
-def main():
+def main(url):
     lastDate = None
     freetimeList = []
     testDictionary = {}
     tempList = []
     
     # link from allocate+
-    url = "https://my-timetable.monash.edu/even/rest/calendar/ical/9cf97753-fcd9-4634-871d-de828696900e"
     cal = Calendar(requests.get(url).text)
     currentDate = date.today()
     print("CURRENT DATE", currentDate)
@@ -111,10 +110,8 @@ def main():
         # print(event.duration)
         # print(event.begin) 
 
-# test1 = [9,11,13,14,15,16.5]
-# def
-
-print(main())
+# Testing
+print(main("https://my-timetable.monash.edu/even/rest/calendar/ical/9cf97753-fcd9-4634-871d-de828696900e"))
 
 
 # if __name__ == "__main":

@@ -10,6 +10,10 @@ def hello():
             Python {sys.version}<br>
             Flask {flask_version}""")
 
+@app.route("/data")
+def data():
+    ics_url = request.args.get('ics-url')
+    return main(ics_url)
 
 if __name__ == "__main__":
     app.run(debug=True)
