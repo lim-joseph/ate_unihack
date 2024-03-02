@@ -4,13 +4,26 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { NextUIProvider } from "@nextui-org/react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import About from "./routes/About.jsx";
+
+const router = createBrowserRouter([
+	{
+		path: "/",
+		element: <App />,
+	},
+	{
+		path: "about",
+		element: <About />,
+	},
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
 		<NextUIProvider>
 			<div className="white text-foreground bg-background h-full">
-				<App />
+				<RouterProvider router={router} />
 			</div>
 		</NextUIProvider>
 	</React.StrictMode>

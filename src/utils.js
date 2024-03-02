@@ -1,5 +1,5 @@
 function durationToSpan(duration) {
-	pass;
+	return duration * 10;
 }
 
 function weekdayToCol(weekday) {
@@ -7,5 +7,6 @@ function weekdayToCol(weekday) {
 }
 
 function startTimeToColStart(startTime) {
+	// return 2 +
 	pass;
 }

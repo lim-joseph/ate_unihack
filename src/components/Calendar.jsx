@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import Event from "./Event";
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
@@ -191,7 +192,7 @@ export default function Calendar() {
 							>
 								<li
 									className="relative mt-px flex sm:col-start-3"
-									style={{ gridRow: "14 / span 12" }}
+									style={{ gridRow: "30 / span 12" }}
 								>
 									<a
 										href="#"
@@ -207,6 +208,14 @@ export default function Calendar() {
 										</p>
 									</a>
 								</li>
+
+								<Event
+									colStart={3}
+									gridRow1={12}
+									span={10}
+									bgColor={"red"}
+									eventName={"test"}
+								/>
 							</ol>
 						</div>
 					</div>
