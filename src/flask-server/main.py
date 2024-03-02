@@ -58,8 +58,9 @@ def merge_timeblock(timetableList) -> list:
 def find_freeblock(mergedTimeblock):
     validTimeDoubled = list(range(2*int(START_TIME),2*int(END_TIME),1))
     validTime = list(np.divide(validTimeDoubled,2))
-    for i in range(len(validTime)):
-        pass
+    diffTime = [time for time in validTime if time not in mergedTimeblock]
+    return diffTime
+
 
 def main():
     lastDate = None
@@ -87,7 +88,7 @@ def main():
             break
         
         if not(lastDate is None) and str(eventBeginDate) != lastDate:
-           datetimeList[lastDate] = tempList
+           datetimeList[lastDate] = merge_timeblock(tempList)
            tempList = []
 
         tempList.append(BeginTimeFloat)
@@ -101,7 +102,8 @@ def main():
         # print(event.begin) 
 
 # print(main())
-print(find_freeblock(1))
+test =[15.0, 18.0]
+print(find_freeblock(test))
 # if __name__ == "__main":
 #     print("hello")
 #     main()
