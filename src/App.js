@@ -9,6 +9,10 @@ function App() {
 	const [showCalendar, setShowCalendar] = useState(false);
 
 	useEffect(() => {
+		document.title = "Allodate+ <3";
+	}, []);
+
+	useEffect(() => {
 		fetch("/members")
 			.then((res) => res.json())
 			.then((data) => {
