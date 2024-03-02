@@ -40,13 +40,12 @@ def get_time(isoTime):
     utcTime = isoTime.split("T")[1]
     timeList = utcTime.split("+")[0].split(":")
     # get hour and minute in float
-    return float(timeList[0]+"."+timeList[1])
+    return float(timeList[0])+float(timeList[1])/60
 
 def merge_timeblock(timetableList) -> list:
     #Output the block of time they are in classes
     mergedTimeblock = set([num for index, num in enumerate(timetableList) if index > 0 and num == timetableList[index-1]])
     mergedTimeblock = sorted(list(set(timetableList) - mergedTimeblock))
-
     mergedIncrementTimeblock = []
     for index,element in enumerate(mergedTimeblock):
         if index % 2 == 0:
@@ -57,7 +56,6 @@ def merge_timeblock(timetableList) -> list:
                     pass
                 else:
                     mergedIncrementTimeblock.append(mergedTimeblock[index]+num/2)
-
     return mergedIncrementTimeblock
 
 def find_freeblock(mergedTimeblock):
@@ -68,7 +66,7 @@ def find_freeblock(mergedTimeblock):
 
 def main():
     lastDate = None
-    freetimeList = {}
+    freetimeList = []
     tempList = []
     
     # link from allocate+
@@ -92,7 +90,7 @@ def main():
             break
         
         if not(lastDate is None) and str(eventBeginDate) != lastDate:
-           freetimeList[lastDate] = merge_timeblock(tempList)
+           freetimeList.append(find_freeblock(merge_timeblock(tempList)))
            tempList = []
            
 
@@ -106,6 +104,9 @@ def main():
         # print(event.location)
         # print(event.duration)
         # print(event.begin) 
+
+# test1 = [9,11,13,14,15,16.5]
+# def
 
 print(main())
 
