@@ -51,7 +51,13 @@ def merge_timeblock(timetableList) -> list:
     for index,element in enumerate(mergedTimeblock):
         if index % 2 == 0:
             for num in range(int(((mergedTimeblock[index+1]-mergedTimeblock[index])*2)+1)):
-                mergedIncrementTimeblock.append(mergedTimeblock[index]+num/2)
+                if num == 0:
+                    pass
+                elif num == int((mergedTimeblock[index+1]-mergedTimeblock[index])*2):
+                    pass
+                else:
+                    mergedIncrementTimeblock.append(mergedTimeblock[index]+num/2)
+
     return mergedIncrementTimeblock
 
 def find_freeblock(mergedTimeblock):
@@ -59,7 +65,6 @@ def find_freeblock(mergedTimeblock):
     validTime = list(np.divide(validTimeDoubled,2))
     freeblockList = [time for time in validTime if time not in mergedTimeblock]
     return freeblockList
-
 
 def main():
     lastDate = None
