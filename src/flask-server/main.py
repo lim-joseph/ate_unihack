@@ -50,9 +50,7 @@ def merge_timeblock(timetableList) -> list:
     for index,element in enumerate(mergedTimeblock):
         if index % 2 == 0:
             for num in range(int((mergedTimeblock[index+1]-mergedTimeblock[index])/0.5)+1):
-                if num == 0:
-                    pass
-                elif num == int((mergedTimeblock[index+1]-mergedTimeblock[index])*2):
+                if num == int((mergedTimeblock[index+1]-mergedTimeblock[index])*2):
                     pass
                 else:
                     mergedIncrementTimeblock.append(mergedTimeblock[index]+num/2)
@@ -67,19 +65,26 @@ def find_freeblock(mergedTimeblock):
 def main():
     lastDate = None
     freetimeList = []
+    testDictionary = {}
     tempList = []
     
     # link from allocate+
-    url = "https://my-timetable.monash.edu/even/rest/calendar/ical/fc0d8661-03f7-4a66-ac97-879948ed28e3"
+    url = "https://my-timetable.monash.edu/even/rest/calendar/ical/9cf97753-fcd9-4634-871d-de828696900e"
     cal = Calendar(requests.get(url).text)
     currentDate = date.today()
+    print("CURRENT DATE", currentDate)
     boundaryDate = currentDate + timedelta(days=7*DISPLAY_WEEK)
-    
+
+
     for event in list(cal.timeline):
         eventBeginDateList = get_date(str(event.begin))
         eventBeginDate = date(eventBeginDateList[0],
                             eventBeginDateList[1],
                             eventBeginDateList[2])
+        
+        # if lastDate == None:
+        #     lastDate = str(eventBeginDate)
+
         BeginTimeFloat = get_time(str(event.begin))
         EndTimeFloat = get_time(str(event.end))
         # ignore the past dates
@@ -89,16 +94,20 @@ def main():
         if eventBeginDate > boundaryDate:
             break
         
-        if not(lastDate is None) and str(eventBeginDate) != lastDate:
-           freetimeList.append(find_freeblock(merge_timeblock(tempList)))
+        if str(eventBeginDate) != lastDate:
+           #freetimeList.append(find_freeblock(merge_timeblock(tempList)))
+           testDictionary[eventBeginDate] = find_freeblock(merge_timeblock(tempList))
            tempList = []
-           
-
+        
         tempList.append(BeginTimeFloat)
         tempList.append(EndTimeFloat)
         lastDate = str(eventBeginDate)
-        
-    return freetimeList
+
+    #print(testDictionary)
+
+    #return freetimeList
+    return testDictionary
+
 
         # print(event.name)
         # print(event.location)
