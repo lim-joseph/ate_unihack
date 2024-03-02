@@ -1,5 +1,5 @@
 import sys
-from flask import Flask
+from flask import Flask, request
 from flask import __version__ as flask_version
 from main import main
 app = Flask(__name__)

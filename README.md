@@ -2,36 +2,32 @@
 
 ### Installation
 
-Prerequisites (UNIX ONLY): npm, git, python
-
-1. Clone the repo
+1. Clone and open the repo
     ```sh
     git clone https://github.com/lim-joseph/ate_unihack.git
-    ```
-2. Open project directory
-    ```
     cd ate_unihack
     ```
-3. Install npm packages
+2. Install npm packages
     ```sh
     npm i
     ```
-4. Run the dev server
-    ```js
-    npm start
-    ```
-5. Open a new terminal in the repo directory
 
-6. Activate python environment
-    ```
+3. Open a second terminal in the same directory
+
+4. Navigate to flask server directory
+    ```sh
     cd src/flask-server
-    source /venv/bin/activate
     ```
-7. Install python packages
-    ```
+5. Install python packages
+    ```sh
     pip install -r req.txt
     ```
-8. Run the flask server
-    ```
+6. Run the flask server
+    ```sh
     flask run
+    ```
+
+7. In the first terminal, run the react dev server
+    ```sh
+    npm start
     ```
