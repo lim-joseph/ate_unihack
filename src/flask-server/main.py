@@ -93,20 +93,17 @@ def main():
         # also ignore the dates more the set week
         if eventBeginDate > boundaryDate:
             break
-        
-        if str(eventBeginDate) != lastDate:
-           #freetimeList.append(find_freeblock(merge_timeblock(tempList)))
-           testDictionary[eventBeginDate] = find_freeblock(merge_timeblock(tempList))
+
+        if not(lastDate is None) and str(eventBeginDate) != lastDate:
+           freetimeList.append((lastDate,find_freeblock(merge_timeblock(tempList))))
            tempList = []
-        
+
+        lastDate = str(eventBeginDate)
         tempList.append(BeginTimeFloat)
         tempList.append(EndTimeFloat)
-        lastDate = str(eventBeginDate)
 
-    #print(testDictionary)
-
-    #return freetimeList
-    return testDictionary
+    freetimeList.append((lastDate,find_freeblock(merge_timeblock(tempList))))
+    return freetimeList
 
 
         # print(event.name)
