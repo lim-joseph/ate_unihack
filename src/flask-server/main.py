@@ -3,7 +3,7 @@ import requests
 from datetime import datetime,date,timedelta
 import numpy as np
 
-DISPLAY_WEEK = 2
+DISPLAY_WEEK = 1
 START_TIME = 8.0 #8AM
 END_TIME = 20.0 #8PM
 
@@ -78,6 +78,10 @@ def main():
         eventBeginDate = date(eventBeginDateList[0],
                             eventBeginDateList[1],
                             eventBeginDateList[2])
+
+        """if lastDate == None:
+            lastDate = str(eventBeginDate)"""
+
         BeginTimeFloat = get_time(str(event.begin))
         EndTimeFloat = get_time(str(event.end))
         # ignore the past dates
@@ -88,14 +92,14 @@ def main():
             break
         
         if not(lastDate is None) and str(eventBeginDate) != lastDate:
-           freetimeList.append(find_freeblock(merge_timeblock(tempList)))
+           freetimeList.append((lastDate,find_freeblock(merge_timeblock(tempList))))
            tempList = []
-           
 
+        lastDate = str(eventBeginDate)
         tempList.append(BeginTimeFloat)
         tempList.append(EndTimeFloat)
-        lastDate = str(eventBeginDate)
-        
+    
+    freetimeList.append((lastDate,find_freeblock(merge_timeblock(tempList))))
     return freetimeList
 
         # print(event.name)
