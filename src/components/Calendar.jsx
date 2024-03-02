@@ -70,55 +70,14 @@ export default function Calendar() {
 								className="col-start-1 col-end-2 row-start-1 grid divide-y divide-gray-100"
 								style={{
 									gridTemplateRows:
-										"repeat(48, minmax(3.5rem, 1fr))",
+										"repeat(29, minmax(3.5rem, 1fr))",
 								}}
 							>
 								<div
 									ref={containerOffset}
 									className="row-end-1 h-7"
 								></div>
-								<div>
-									<div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-										12AM
-									</div>
-								</div>
-								<div />
-								<div>
-									<div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-										1AM
-									</div>
-								</div>
-								<div />
-								<div>
-									<div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-										2AM
-									</div>
-								</div>
-								<div />
-								<div>
-									<div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-										3AM
-									</div>
-								</div>
-								<div />
-								<div>
-									<div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-										4AM
-									</div>
-								</div>
-								<div />
-								<div>
-									<div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-										5AM
-									</div>
-								</div>
-								<div />
-								<div>
-									<div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-										6AM
-									</div>
-								</div>
-								<div />
+
 								<div>
 									<div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
 										7AM
@@ -208,19 +167,6 @@ export default function Calendar() {
 										9PM
 									</div>
 								</div>
-								<div />
-								<div>
-									<div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-										10PM
-									</div>
-								</div>
-								<div />
-								<div>
-									<div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-										11PM
-									</div>
-								</div>
-								<div />
 							</div>
 
 							{/* Vertical lines */}

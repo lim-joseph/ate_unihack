@@ -1,4 +1,4 @@
-export default function Event({ colStart, gridRow, span }) {
+export default function Event({ colStart, gridRow, span, bgColor, eventName }) {
 	return (
 		<li
 			className="relative mt-px flex sm:col-start-3"
@@ -9,7 +9,7 @@ export default function Event({ colStart, gridRow, span }) {
 				className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-pink-50 p-2 text-xs leading-5 hover:bg-pink-100"
 			>
 				<p className="order-1 font-semibold text-pink-700">
-					Flight to Paris
+					{eventName}
 				</p>
 				<p className="text-pink-500 group-hover:text-pink-700">
 					<time dateTime="2022-01-12T07:30">7:30 AM</time>
