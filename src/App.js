@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import "./index.css";
+import Navbar from "./components/Navbar.jsx";
+import HomeHero from "./components/HomeHero.jsx";
+import Calendar from "./components/Calendar.jsx";
 
 function App() {
 	const [data, setData] = useState({});
+	const [showCalendar, setShowCalendar] = useState(false);
 
 	useEffect(() => {
 		fetch("/members")
@@ -14,8 +18,18 @@ function App() {
 	}, []);
 
 	return (
-		<div>
-			<p className="bg-red-500">Hello world</p>
+		<div className="min-h-svh">
+			<Navbar />
+
+			{!showCalendar ? (
+				<HomeHero
+					showTimetable={showCalendar}
+					setShowTimetable={setShowCalendar}
+				/>
+			) : (
+				<Calendar showTimetable={showCalendar} />
+			)}
+
 			{typeof data.members === "undefined" ? (
 				<p>Loading...</p>
 			) : (
