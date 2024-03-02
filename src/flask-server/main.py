@@ -3,7 +3,7 @@ import requests
 from datetime import datetime,date,timedelta
 import numpy as np
 
-DISPLAY_WEEK = 1
+DISPLAY_WEEK = 2
 START_TIME = 8.0 #8AM
 END_TIME = 20.0 #8PM
 
@@ -68,7 +68,7 @@ def main():
     tempList = []
     
     # link from allocate+
-    url = "https://my-timetable.monash.edu/even/rest/calendar/ical/fc0d8661-03f7-4a66-ac97-879948ed28e3"
+    url = "https://my-timetable.monash.edu/even/rest/calendar/ical/9cf97753-fcd9-4634-871d-de828696900e"
     cal = Calendar(requests.get(url).text)
     currentDate = date.today()
     boundaryDate = currentDate + timedelta(days=7*DISPLAY_WEEK)
