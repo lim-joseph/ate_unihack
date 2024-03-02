@@ -65,22 +65,25 @@ def find_freeblock(mergedTimeblock):
 def main():
     lastDate = None
     freetimeList = []
+    testDictionary = {}
     tempList = []
     
     # link from allocate+
     url = "https://my-timetable.monash.edu/even/rest/calendar/ical/9cf97753-fcd9-4634-871d-de828696900e"
     cal = Calendar(requests.get(url).text)
     currentDate = date.today()
+    print("CURRENT DATE", currentDate)
     boundaryDate = currentDate + timedelta(days=7*DISPLAY_WEEK)
-    
+
+
     for event in list(cal.timeline):
         eventBeginDateList = get_date(str(event.begin))
         eventBeginDate = date(eventBeginDateList[0],
                             eventBeginDateList[1],
                             eventBeginDateList[2])
-
-        """if lastDate == None:
-            lastDate = str(eventBeginDate)"""
+        
+        # if lastDate == None:
+        #     lastDate = str(eventBeginDate)
 
         BeginTimeFloat = get_time(str(event.begin))
         EndTimeFloat = get_time(str(event.end))
@@ -90,7 +93,7 @@ def main():
         # also ignore the dates more the set week
         if eventBeginDate > boundaryDate:
             break
-        
+
         if not(lastDate is None) and str(eventBeginDate) != lastDate:
            freetimeList.append((lastDate,find_freeblock(merge_timeblock(tempList))))
            tempList = []
@@ -98,9 +101,10 @@ def main():
         lastDate = str(eventBeginDate)
         tempList.append(BeginTimeFloat)
         tempList.append(EndTimeFloat)
-    
+
     freetimeList.append((lastDate,find_freeblock(merge_timeblock(tempList))))
     return freetimeList
+
 
         # print(event.name)
         # print(event.location)
