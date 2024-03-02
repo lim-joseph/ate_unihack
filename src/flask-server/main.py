@@ -43,10 +43,9 @@ def get_time(isoTime):
     return float(timeList[0]+"."+timeList[1])
 
 def merge_timeblock(timetableList):
-    pass
-    # for i in range(len(timetableList)):
-    #     if lastEndTime == timetableList[i][1]:
-    #     lastEndTime = timetableList[i][1]
+    #Output the block of time they are in classes
+    final = set([num for index, num in enumerate(timetableList) if index > 0 and num == timetableList[index-1]])
+    final = sorted(list(set(timetableList) - final))
 
 def find_freeblock(mergedTimeblock):
     validTimeDoubled = list(range(2*int(START_TIME),2*int(END_TIME),1))
