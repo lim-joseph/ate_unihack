@@ -1,6 +1,7 @@
 from ics import Calendar
 import requests
 from datetime import datetime,date,timedelta
+import numpy as np
 
 DISPLAY_WEEK = 2
 START_TIME = 8.0 #8AM
@@ -41,11 +42,17 @@ def get_time(isoTime):
     # get hour and minute in float
     return float(timeList[0]+"."+timeList[1])
 
-def find_free_slot(timetableList):
+def merge_timeblock(timetableList):
     pass
     # for i in range(len(timetableList)):
     #     if lastEndTime == timetableList[i][1]:
     #     lastEndTime = timetableList[i][1]
+
+def find_freeblock(mergedTimeblock):
+    validTimeDoubled = list(range(2*int(START_TIME),2*int(END_TIME),1))
+    validTime = list(np.divide(validTimeDoubled,2))
+    for i in range(len(validTime)):
+        pass
 
 def main():
     lastDate = None
@@ -86,7 +93,8 @@ def main():
         # print(event.duration)
         # print(event.begin) 
 
-print(main())
+# print(main())
+print(find_freeblock(1))
 # if __name__ == "__main":
 #     print("hello")
 #     main()
