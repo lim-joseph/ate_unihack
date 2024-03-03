@@ -19,7 +19,14 @@ export default function Calendar({ data }) {
 	}, []);
 
 	return (
-		<div className="flex w-[80svw] mx-auto h-full flex-col mt-12">
+		<div className="flex w-[80svw] mx-auto h-full flex-col mt-8">
+			<h2 className="text-2xl bg-clip-text drop-shadow-md text-center font-sans font-bold mb-8">
+				You've been{" "}
+				<span className="px-2 text-4xl bg-clip-text text-pink-600 drop-shadow-md text-center font-sans font-bold">
+					ALLODATED!
+				</span>
+			</h2>
+
 			<div
 				ref={container}
 				className="isolate flex flex-auto flex-col overflow-auto bg-white"
