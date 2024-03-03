@@ -12,13 +12,12 @@ import "../index.css";
 export default function App({ setShowCalendar }) {
 	return (
 		<Navbar className="border-b-1 drop-shadow-sm bg-white hover:cursor-pointer">
-			<NavbarBrand>
-				<a
-					className="font-bold text-inherit"
-					onClick={() => {
-						setShowCalendar(false);
-					}}
-				>
+			<NavbarBrand
+				onClick={() => {
+					setShowCalendar(false);
+				}}
+			>
+				<a className="font-bold text-inherit w-full h-full">
 					ALLODATE+ &lt;3
 				</a>
 			</NavbarBrand>
@@ -29,12 +28,20 @@ export default function App({ setShowCalendar }) {
 					</Link>
 				</NavbarItem>
 				<NavbarItem isActive>
-					<Link href="/" aria-current="page">
+					<Link
+						href="/"
+						aria-current="page"
+						className="text-pink-500"
+					>
 						Main
 					</Link>
 				</NavbarItem>
 				<NavbarItem>
-					<Link color="foreground" href="https://github.com/lim-joseph/ate_unihack" target="_blank">
+					<Link
+						color="foreground"
+						href="https://github.com/lim-joseph/ate_unihack"
+						target="_blank"
+					>
 						Repository
 					</Link>
 				</NavbarItem>
