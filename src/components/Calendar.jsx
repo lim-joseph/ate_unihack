@@ -7,53 +7,6 @@ export default function Calendar({ data }) {
 	const containerNav = useRef(null);
 	const containerOffset = useRef(null);
 
-	const test = {
-		date: "2024-04-22",
-		days: {
-			0: [
-				{
-					start: 9.5,
-					duration: 1.5,
-				},
-				{
-					start: 11.0,
-					duration: 2.0,
-				},
-			],
-			1: [
-				{
-					start: 15.5,
-					duration: 3.0,
-				},
-				{
-					start: 19.0,
-					duration: 1.0,
-				},
-			],
-			2: [
-				{
-					start: 10.0,
-					duration: 1.0,
-				},
-				{
-					start: 11.0,
-					duration: 2.0,
-				},
-				{
-					start: 14.0,
-					duration: 5.0,
-				},
-			],
-			3: [],
-			4: [
-				{
-					start: 15.0,
-					duration: 4.0,
-				},
-			],
-		},
-	};
-
 	useEffect(() => {
 		// Set the container scroll position based on the current time.
 		const currentMinute = new Date().getHours() * 60;
@@ -234,9 +187,9 @@ export default function Calendar({ data }) {
 										"1.75rem repeat(288, minmax(0, 1fr)) auto",
 								}}
 							>
-								{test &&
-									Object.keys(test.days).map((day) => {
-										return test.days[day].map((event) => {
+								{data &&
+									Object.keys(data.days).map((day) => {
+										return data.days[day].map((event) => {
 											return (
 												<Event
 													key={crypto.randomUUID()}
