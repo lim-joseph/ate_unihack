@@ -17,45 +17,45 @@ data = {
         "0": [
             {
                 "start": 9.0,
-                "duration":  1.5,
+                "duration": 1.5,
             },
             {
                 "start": 11.0,
-                "duration":  2.0,
-            }
+                "duration": 2.0,
+            },
         ],
         "1": [
             {
                 "start": 14.0,
-                "duration":  3.0,
+                "duration": 3.0,
             },
             {
                 "start": 19.0,
-                "duration":  1.0,
-            }
+                "duration": 1.0,
+            },
         ],
         "2": [
             {
                 "start": 10.0,
-                "duration":  1.0,
+                "duration": 1.0,
             },
             {
                 "start": 11.00,
-                "duration":  2.0,
+                "duration": 2.0,
             },
             {
                 "start": 14.0,
-                "duration":  5.0,
-            }
+                "duration": 5.0,
+            },
         ],
         "3": [],
         "4": [
             {
                 "start": 15.0,
-                "duration":  4.0,
+                "duration": 4.0,
             }
-        ]
-    }
+        ],
+    },
 }
 
 
@@ -103,28 +103,24 @@ def find_freeblock(mergedTimeblock):
     freeblockList = [time for time in validTime if time not in mergedTimeblock]
     return freeblockList
 
+
 def intervals_to_blocks(intervalList):
     block_list = []
     start = last = intervalList[0]
     for i in range(len(intervalList)):
         current = intervalList[i]
-        if (current - last > 0.5):
-            block_list.append({
-                "start": start,
-                "duration": last - start
-            })
+        if current - last > 0.5:
+            block_list.append({"start": start, "duration": last - start})
             start = last = current
         else:
             last = current
-    block_list.append({
-        "start": start,
-        "duration": last - start
-    })
+    block_list.append({"start": start, "duration": last - start})
 
     return block_list
 
+
 def main(url1, url2):
-    #link from allocate+
+    # link from allocate+
     cal = Calendar(requests.get(url1).text)
     cal2 = Calendar(requests.get(url2).text)
 
@@ -133,10 +129,8 @@ def main(url1, url2):
 
     person_a_dict = standardising(person_a)
     person_b_dict = standardising(person_b)
-    
-    data = {   
-        "days":comparison(person_a_dict,person_b_dict)
-    }
+
+    data = {"days": comparison(person_a_dict, person_b_dict)}
     return data
 
 
@@ -146,13 +140,13 @@ def get_calendar(cal):
     testDictionary = {}
     tempList = []
     currentDate = date.today()
-    boundaryDate = currentDate + timedelta(days=7*DISPLAY_WEEK)
+    boundaryDate = currentDate + timedelta(days=7 * DISPLAY_WEEK)
 
     for event in list(cal.timeline):
         eventBeginDateList = get_date(str(event.begin))
-        eventBeginDate = date(eventBeginDateList[0],
-                            eventBeginDateList[1],
-                            eventBeginDateList[2])
+        eventBeginDate = date(
+            eventBeginDateList[0], eventBeginDateList[1], eventBeginDateList[2]
+        )
 
         # if lastDate == None:
         #     lastDate = str(eventBeginDate)
@@ -166,45 +160,48 @@ def get_calendar(cal):
         if eventBeginDate > boundaryDate:
             break
 
-        if not(lastDate is None) and str(eventBeginDate) != lastDate:
-           freetimeList.append((lastDate2,find_freeblock(merge_timeblock(tempList))))
-           tempList = []
+        if not (lastDate is None) and str(eventBeginDate) != lastDate:
+            freetimeList.append((lastDate2, find_freeblock(merge_timeblock(tempList))))
+            tempList = []
 
         lastDate = str(eventBeginDate)
         lastDate2 = eventBeginDate
         tempList.append(BeginTimeFloat)
         tempList.append(EndTimeFloat)
 
-    freetimeList.append((lastDate2,find_freeblock(merge_timeblock(tempList))))
+    freetimeList.append((lastDate2, find_freeblock(merge_timeblock(tempList))))
     return freetimeList
 
-def standardising(freetime:list):
-    """This functions aim to create a dictionary with 
-    dates as the keys and 
+
+def standardising(freetime: list):
+    """This functions aim to create a dictionary with
+    dates as the keys and
     the free time available as the values
 
     Args:
         freetime (list): A nested list of dates and the times that you are free to hang out
     """
     DISPLAY_WEEK = 1
-    date_list = [0,1,2,3,4,5,6]
+    date_list = [0, 1, 2, 3, 4, 5, 6]
     values = [None for x in range(len(date_list))]
 
-    test_dict = {k:v for (k,v) in zip(date_list,values)}
+    test_dict = {k: v for (k, v) in zip(date_list, values)}
 
     for elements in freetime:
         test_dict[elements[0].weekday()] = elements[1]
-    
+
     return test_dict
 
-def comparison(person_a:dict,student_b:dict):
+
+def comparison(person_a: dict, student_b: dict):
     sameFreeTimeDict = {}
-    date_list = [0,1,2,3,4]
+    date_list = [0, 1, 2, 3, 4]
     for date in date_list:
         if person_a[date] != None and student_b[date] != None:
             final = sorted(set(person_a[date]).intersection(set(student_b[date])))
             sameFreeTimeDict[str(date)] = intervals_to_blocks(final)
     return sameFreeTimeDict
+
 
 # # Testing
 # print(main("https://my-timetable.monash.edu/even/rest/calendar/ical/9cf97753-fcd9-4634-871d-de828696900e"))
@@ -212,4 +209,4 @@ def comparison(person_a:dict,student_b:dict):
 if __name__ == "__main__":
     url1 = "https://my-timetable.monash.edu/even/rest/calendar/ical/9cf97753-fcd9-4634-871d-de828696900e"
     url2 = "https://my-timetable.monash.edu/even/rest/calendar/ical/570d3a7c-5a14-4199-9b85-c906dda749e1"
-    print(main(url1,url2))
+    print(main(url1, url2))
