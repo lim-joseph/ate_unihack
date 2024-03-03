@@ -3,7 +3,7 @@ import requests
 from datetime import datetime, date, timedelta
 import numpy as np
 
-DISPLAY_WEEK = 2
+DISPLAY_WEEK = 1
 START_TIME = 8.0  # 8AM
 END_TIME = 20.0  # 8PM
 
@@ -170,61 +170,79 @@ def find_freeblock(mergedTimeblock):
     freeblockList = [time for time in validTime if time not in mergedTimeblock]
     return freeblockList
 
+def main(url1, url2):
+    #link from allocate+
+    cal = Calendar(requests.get(url1).text)
+    cal2 = Calendar(requests.get(url2).text)
 
-def main(url, url2):
+    person_a = get_calendar(cal)
+    person_b = get_calendar(cal2)
+
+def get_calendar(cal):
     lastDate = None
     freetimeList = []
     testDictionary = {}
     tempList = []
+    currentDate = date.today()
+    boundaryDate = currentDate + timedelta(days=7*DISPLAY_WEEK)
 
-    # link from allocate+
-    # cal = Calendar(requests.get(url).text)
-    # cal2 = Calendar(requests.get(url2).text)
-    # currentDate = date.today()
-    # print("CURRENT DATE", currentDate)
-    # boundaryDate = currentDate + timedelta(days=7*DISPLAY_WEEK)
+    for event in list(cal.timeline):
+        eventBeginDateList = get_date(str(event.begin))
+        eventBeginDate = date(eventBeginDateList[0],
+                            eventBeginDateList[1],
+                            eventBeginDateList[2])
 
-    # for event in list(cal.timeline):
-    #     eventBeginDateList = get_date(str(event.begin))
-    #     eventBeginDate = date(eventBeginDateList[0],
-    #                         eventBeginDateList[1],
-    #                         eventBeginDateList[2])
+        # if lastDate == None:
+        #     lastDate = str(eventBeginDate)
 
-    #     # if lastDate == None:
-    #     #     lastDate = str(eventBeginDate)
+        BeginTimeFloat = get_time(str(event.begin))
+        EndTimeFloat = get_time(str(event.end))
+        # ignore the past dates
+        if eventBeginDate < currentDate:
+            continue
+        # also ignore the dates more the set week
+        if eventBeginDate > boundaryDate:
+            break
 
-    #     BeginTimeFloat = get_time(str(event.begin))
-    #     EndTimeFloat = get_time(str(event.end))
-    #     # ignore the past dates
-    #     if eventBeginDate < currentDate:
-    #         continue
-    #     # also ignore the dates more the set week
-    #     if eventBeginDate > boundaryDate:
-    #         break
+        if not(lastDate is None) and str(eventBeginDate) != lastDate:
+           freetimeList.append((lastDate2,find_freeblock(merge_timeblock(tempList))))
+           tempList = []
 
-    #     if not(lastDate is None) and str(eventBeginDate) != lastDate:
-    #        freetimeList.append((lastDate,find_freeblock(merge_timeblock(tempList))))
-    #        tempList = []
+        lastDate = str(eventBeginDate)
+        lastDate2 = eventBeginDate
+        tempList.append(BeginTimeFloat)
+        tempList.append(EndTimeFloat)
 
-    #     lastDate = str(eventBeginDate)
-    #     tempList.append(BeginTimeFloat)
-    #     tempList.append(EndTimeFloat)
+    freetimeList.append((lastDate2,find_freeblock(merge_timeblock(tempList))))
+    return freetimeList
 
-    # freetimeList.append((lastDate, find_freeblock(merge_timeblock(tempList))))
-    return (
-        f"Calendar1: {requests.get(url).text}\n\n\nCalendar2: {requests.get(url2).text}"
-    )
+def standardising(freetime:list,date_list:list):
+    """This functions aim to create a dictionary with 
+    dates as the keys and 
+    the free time available as the values
 
-    # print(event.name)
-    # print(event.location)
-    # print(event.duration)
-    # print(event.begin)
+    Args:
+        freetime (list): A nested list of dates and the times that you are free to hang out
+    """
+    DISPLAY_WEEK = 1
+    values = [None for x in range(len(date_list))]
 
+    test_dict = {k:v for (k,v) in zip(date_list,values)}
 
+    for elements in freetime:
+        test_dict[elements[0].weekday()] = elements[1]
+    
+    return test_dict
+
+def comparison(person_a:dict,student_b:dict,period:list):
+    for date in period:
+        if person_a[date] != None and student_b[date] != None:
+            final = set(person_a[date]).intersection(set(student_b[date]))
+            print(f"On this date: ({date}) you both are available during these times \n {final}")
 # # Testing
 # print(main("https://my-timetable.monash.edu/even/rest/calendar/ical/9cf97753-fcd9-4634-871d-de828696900e"))
 
-
-# if __name__ == "__main":
-#     print("hello")
-#     main()
+if __name__ == "__main__":
+    url1 = "https://my-timetable.monash.edu/even/rest/calendar/ical/9cf97753-fcd9-4634-871d-de828696900e"
+    url2 = "https://my-timetable.monash.edu/even/rest/calendar/ical/570d3a7c-5a14-4199-9b85-c906dda749e1"
+    main(url1,url2)
