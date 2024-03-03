@@ -1,0 +1,2 @@
+buildCommand: npm build
+publishDir: build
