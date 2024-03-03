@@ -17,6 +17,7 @@ def hello():
 def data():
     ics_url = request.args.get("ics-url1")
     ics_url2 = request.args.get("ics-url2")
+    print(main(ics_url, ics_url2))
     return main(ics_url, ics_url2)
 
 

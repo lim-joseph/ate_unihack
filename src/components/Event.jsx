@@ -9,12 +9,12 @@ export default function Event({
 }) {
 	return (
 		<li
-			className={`relative mt-px flex col-start-${colStart}`}
+			className={`relative mt-px flex col-start-${colStart} overflow-hidden`}
 			style={{ gridRow: `${gridRow1} / span ${span}` }}
 		>
 			<a
 				href="#"
-				className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-pink-50 p-2 text-xs leading-5 hover:bg-pink-100"
+				className="group absolute inset-1 flex flex-col overflow-hidden rounded-lg bg-pink-50 p-2 text-xs leading-5 hover:bg-pink-100"
 			>
 				<p className="order-1 font-semibold text-pink-700">
 					{eventName}

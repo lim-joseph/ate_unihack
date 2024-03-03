@@ -21,7 +21,6 @@ export default function HomeHero({ setShowTimetable, setData }) {
 				.then((res) => res.json())
 				.then((data) => {
 					if (typeof data === "object") setData(data);
-					// console.log(data);
 					setShowTimetable(true);
 					setIsFetching(false);
 				})
