@@ -113,7 +113,9 @@ def main(url1, url2):
 
     person_a_dict = standardising(person_a)
     person_b_dict = standardising(person_b)
-    comparison(person_a_dict,person_b_dict)
+    
+    return comparison(person_a_dict,person_b_dict)
+
 
 def get_calendar(cal):
     lastDate = None
@@ -176,7 +178,7 @@ def comparison(person_a:dict,student_b:dict):
     date_list = [0,1,2,3,4,5,6]
     for date in date_list:
         if person_a[date] != None and student_b[date] != None:
-            final = set(person_a[date]).intersection(set(student_b[date]))
+            final = sorted(set(person_a[date]).intersection(set(student_b[date])))
             print(f"On this date: ({date}) you both are available during these times \n {final}")
 # # Testing
 # print(main("https://my-timetable.monash.edu/even/rest/calendar/ical/9cf97753-fcd9-4634-871d-de828696900e"))

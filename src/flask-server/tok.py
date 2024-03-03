@@ -1,0 +1,2 @@
+url = "https://oqkbjpbqbzcmwrviuami.supabase.co"
+key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9xa2JqcGJxYnpjbXdydml1YW1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkzMzY0MDksImV4cCI6MjAyNDkxMjQwOX0.l9VRoDEYGcuoht7nQYgBRCKCbUm-IPzwfeXp0ubQr6I"
