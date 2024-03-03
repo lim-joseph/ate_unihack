@@ -7,12 +7,10 @@ import Calendar from "./components/Calendar.jsx";
 function App() {
 	const [data, setData] = useState({});
 	const [showCalendar, setShowCalendar] = useState(false);
-	const [input1, setInput1] = useState("");
-	const [input2, setInput2] = useState("");
 
-	useEffect(() => {
-		document.title = "Allodate+ <3";
-	}, []);
+	// useEffect(() => {
+	// 	console.log(data.days[0]);
+	// }, []);
 
 	return (
 		<div className="min-h-svh">
@@ -22,12 +20,10 @@ function App() {
 				<HomeHero
 					showTimetable={showCalendar}
 					setShowTimetable={setShowCalendar}
-					setInput1={setInput1}
-					setInput2={setInput2}
 					setData={setData}
 				/>
 			) : (
-				<Calendar showTimetable={showCalendar} />
+				<Calendar showTimetable={showCalendar} data={data} />
 			)}
 		</div>
 	);

@@ -1,14 +1,58 @@
 import { useEffect, useRef } from "react";
 import Event from "./Event";
+import { durationToSpan, startTimeToGridRow } from "../utils.js";
 
-function classNames(...classes) {
-	return classes.filter(Boolean).join(" ");
-}
-
-export default function Calendar() {
+export default function Calendar({ data }) {
 	const container = useRef(null);
 	const containerNav = useRef(null);
 	const containerOffset = useRef(null);
+
+	const test = {
+		date: "2024-04-22",
+		days: {
+			0: [
+				{
+					start: 9.5,
+					duration: 1.5,
+				},
+				{
+					start: 11.0,
+					duration: 2.0,
+				},
+			],
+			1: [
+				{
+					start: 15.5,
+					duration: 3.0,
+				},
+				{
+					start: 19.0,
+					duration: 1.0,
+				},
+			],
+			2: [
+				{
+					start: 10.0,
+					duration: 1.0,
+				},
+				{
+					start: 11.0,
+					duration: 2.0,
+				},
+				{
+					start: 14.0,
+					duration: 5.0,
+				},
+			],
+			3: [],
+			4: [
+				{
+					start: 15.0,
+					duration: 4.0,
+				},
+			],
+		},
+	};
 
 	useEffect(() => {
 		// Set the container scroll position based on the current time.
@@ -190,27 +234,29 @@ export default function Calendar() {
 										"1.75rem repeat(288, minmax(0, 1fr)) auto",
 								}}
 							>
-								<Event
-									colStart={3}
-									gridRow1={12}
-									span={10}
-									eventName={"test"}
-									t
-								/>
-
-								<Event
-									colStart={1}
-									gridRow1={36}
-									span={20}
-									eventName={"test"}
-								/>
-
-								<Event
-									colStart={3}
-									gridRow1={24}
-									span={30}
-									eventName={"test"}
-								/>
+								{test &&
+									Object.keys(test.days).map((day) => {
+										return test.days[day].map((event) => {
+											return (
+												<Event
+													key={crypto.randomUUID()}
+													gridRow1={startTimeToGridRow(
+														event.start
+													)}
+													span={durationToSpan(
+														event.duration
+													)}
+													colStart={parseInt(day) + 1}
+													eventName={
+														"Matching break <3"
+													}
+													startTime={parseFloat(
+														event.start
+													)}
+												/>
+											);
+										});
+									})}
 							</ol>
 						</div>
 					</div>

@@ -3,18 +3,11 @@ import { Button } from "@nextui-org/react";
 import Hearts from "../assets/hearts.png";
 import { useRef } from "react";
 
-export default function HomeHero({
-	setShowTimetable,
-	setInput1,
-	setInput2,
-	setData,
-}) {
+export default function HomeHero({ setShowTimetable, setData }) {
 	const input1Ref = useRef();
 	const input2Ref = useRef();
 
 	function handleSubmit() {
-		setInput1(input1Ref.current.value);
-		setInput2(input2Ref.current.value);
 		setShowTimetable(true);
 
 		const url =
