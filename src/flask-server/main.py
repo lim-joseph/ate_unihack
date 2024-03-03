@@ -103,6 +103,26 @@ def find_freeblock(mergedTimeblock):
     freeblockList = [time for time in validTime if time not in mergedTimeblock]
     return freeblockList
 
+def intervals_to_blocks(intervalList):
+    block_list = []
+    start = last = intervalList[0]
+    for i in range(len(intervalList)):
+        current = intervalList[i]
+        if (current - last > 0.5):
+            block_list.append({
+                "start": start,
+                "duration": last - start
+            })
+            start = last = current
+        else:
+            last = current
+    block_list.append({
+        "start": start,
+        "duration": last - start
+    })
+
+    return block_list
+
 def main(url1, url2):
     #link from allocate+
     cal = Calendar(requests.get(url1).text)
