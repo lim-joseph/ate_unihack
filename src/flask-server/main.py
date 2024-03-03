@@ -135,7 +135,7 @@ def main(url1, url2):
     person_b_dict = standardising(person_b)
     
     data = {   
-        "day":comparison(person_a_dict,person_b_dict)
+        "days":comparison(person_a_dict,person_b_dict)
     }
     return data
 

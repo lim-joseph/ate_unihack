@@ -8,8 +8,6 @@ export default function HomeHero({ setShowTimetable, setData }) {
 	const input2Ref = useRef();
 
 	function handleSubmit() {
-		setShowTimetable(true);
-
 		const url =
 			"/data?ics-url1=" +
 			encodeURIComponent(input1Ref.current.value) +
@@ -18,10 +16,11 @@ export default function HomeHero({ setShowTimetable, setData }) {
 
 		if (url) {
 			fetch(url)
-				.then((res) => res.text())
+				.then((res) => res.json())
 				.then((data) => {
 					if (typeof data === "object") setData(data);
-					console.log(data);
+					// console.log(data);
+					setShowTimetable(true);
 				})
 				.catch((error) => console.error("Error fetching data:", error));
 		}
