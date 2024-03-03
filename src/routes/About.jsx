@@ -4,7 +4,7 @@ export default function About({ setShowCalendar }) {
 	return (
 		<>
 			<Navbar setShowCalendar={{ setShowCalendar }} />
-			Hello world!
+			Look I used react router!
 		</>
 	);
 }

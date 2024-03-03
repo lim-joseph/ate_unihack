@@ -20,7 +20,7 @@ export default function HomeHero({ setShowTimetable, setData }) {
 			fetch(url)
 				.then((res) => res.text())
 				.then((data) => {
-					if (data) setData(data);
+					if (typeof data === "object") setData(data);
 					console.log(data);
 				})
 				.catch((error) => console.error("Error fetching data:", error));
