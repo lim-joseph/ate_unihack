@@ -23,10 +23,10 @@ export default function HomeHero({ setShowTimetable, setData }) {
 				.then((data) => {
 					if (typeof data === "object") setData(data);
 					setShowTimetable(true);
+					setFetching(false);
 				})
 				.catch((error) => console.error("Error fetching data:", error));
 		}
-		setFetching(false);
 	}
 
 	return (
