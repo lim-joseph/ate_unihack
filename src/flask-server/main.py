@@ -111,6 +111,10 @@ def main(url1, url2):
     person_a = get_calendar(cal)
     person_b = get_calendar(cal2)
 
+    person_a_dict = standardising(person_a)
+    person_b_dict = standardising(person_b)
+    comparison(person_a_dict,person_b_dict)
+
 def get_calendar(cal):
     lastDate = None
     freetimeList = []
@@ -149,7 +153,7 @@ def get_calendar(cal):
     freetimeList.append((lastDate2,find_freeblock(merge_timeblock(tempList))))
     return freetimeList
 
-def standardising(freetime:list,date_list:list):
+def standardising(freetime:list):
     """This functions aim to create a dictionary with 
     dates as the keys and 
     the free time available as the values
@@ -158,6 +162,7 @@ def standardising(freetime:list,date_list:list):
         freetime (list): A nested list of dates and the times that you are free to hang out
     """
     DISPLAY_WEEK = 1
+    date_list = [0,1,2,3,4,5,6]
     values = [None for x in range(len(date_list))]
 
     test_dict = {k:v for (k,v) in zip(date_list,values)}
@@ -167,8 +172,9 @@ def standardising(freetime:list,date_list:list):
     
     return test_dict
 
-def comparison(person_a:dict,student_b:dict,period:list):
-    for date in period:
+def comparison(person_a:dict,student_b:dict):
+    date_list = [0,1,2,3,4,5,6]
+    for date in date_list:
         if person_a[date] != None and student_b[date] != None:
             final = set(person_a[date]).intersection(set(student_b[date]))
             print(f"On this date: ({date}) you both are available during these times \n {final}")
