@@ -1,6 +1,8 @@
 # ALLODATE+ <3
+
 Compare your Allocate+ timetables with your friends and find your matching downtime!
-Created for Unihack Melbourne 2024
+
+Created for Unihack Melbourne 2024, Allodate+ uses a React frontend and a Python backend powered by Flask to parse ics files to determine matching university timetable gaps.
 
 ### Installation
 
@@ -10,6 +12,7 @@ Created for Unihack Melbourne 2024
     cd ate_unihack
     ```
 2. Install npm packages
+
     ```sh
     npm i
     ```
@@ -25,6 +28,7 @@ Created for Unihack Melbourne 2024
     pip install -r req.txt
     ```
 6. Run the flask server
+
     ```sh
     flask run
     ```
