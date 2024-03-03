@@ -1,5 +1,6 @@
 # ALLODATE+ <3
 Compare your Allocate+ timetables with your friends and find your matching downtime!
+Created for Unihack Melbourne 2024
 
 ### Installation
 
