@@ -137,7 +137,6 @@ def main(url1, url2):
 def get_calendar(cal):
     lastDate = None
     freetimeList = []
-    testDictionary = {}
     tempList = []
     currentDate = date.today()
     boundaryDate = currentDate + timedelta(days=7 * DISPLAY_WEEK)
@@ -161,15 +160,14 @@ def get_calendar(cal):
             break
 
         if not (lastDate is None) and str(eventBeginDate) != lastDate:
-            freetimeList.append((lastDate2, find_freeblock(merge_timeblock(tempList))))
+            freetimeList.append((lastDate, find_freeblock(merge_timeblock(tempList))))
             tempList = []
 
-        lastDate = str(eventBeginDate)
-        lastDate2 = eventBeginDate
+        lastDate = eventBeginDate
         tempList.append(BeginTimeFloat)
         tempList.append(EndTimeFloat)
 
-    freetimeList.append((lastDate2, find_freeblock(merge_timeblock(tempList))))
+    freetimeList.append((lastDate, find_freeblock(merge_timeblock(tempList))))
     return freetimeList
 
 
