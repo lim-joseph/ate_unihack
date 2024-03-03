@@ -9,121 +9,54 @@ END_TIME = 20.0  # 8PM
 
 # TEST DATA / RECOMMENDED FORMAT
 # This is what will be sent to the react frontend
-# - It's a list of weeks,
 # - "0" - "4" represents Monday - Friday
 # - each day contains a list of time blocks
-weeks = [
-    {
-        "date": "2024-04-22",
-        "days": {
-            "0": [
-                {
-                    "start": "3:00",
-                    "end":  "6:00",
-                },
-                {
-                    "start": "11:00",
-                    "end":  "12:00",
-                }
-            ],
-            "1": [
-                {
-                    "start": "3:00",
-                    "end":  "6:00",
-                },
-                {
-                    "start": "11:00",
-                    "end":  "12:00",
-                }
-            ],
-            "2": [
-                {
-                    "start": "3:00",
-                    "end":  "6:00",
-                },
-                {
-                    "start": "11:00",
-                    "end":  "12:00",
-                },
-                {
-                    "start": "13:00",
-                    "end":  "15:00",
-                }
-            ],
-            "3": [
-                {
-                    "start": "3:00",
-                    "end":  "6:00",
-                },
-                {
-                    "start": "11:00",
-                    "end":  "12:00",
-                }
-            ],
-            "4": [
-                {
-                    "start": "3:00",
-                    "end":  "6:00",
-                }
-            ]
-        }
-    },
-    {
-        "date": "2024-04-22",
-        "days": {
-            "0": [
-                {
-                    "start": "3:00",
-                    "end":  "6:00",
-                },
-                {
-                    "start": "11:00",
-                    "end":  "12:00",
-                }
-            ],
-            "1": [
-                {
-                    "start": "3:00",
-                    "end":  "6:00",
-                },
-                {
-                    "start": "11:00",
-                    "end":  "12:00",
-                }
-            ],
-            "2": [
-                {
-                    "start": "3:00",
-                    "end":  "6:00",
-                },
-                {
-                    "start": "11:00",
-                    "end":  "12:00",
-                },
-                {
-                    "start": "13:00",
-                    "end":  "15:00",
-                }
-            ],
-            "3": [
-                {
-                    "start": "3:00",
-                    "end":  "6:00",
-                },
-                {
-                    "start": "11:00",
-                    "end":  "12:00",
-                }
-            ],
-            "4": [
-                {
-                    "start": "3:00",
-                    "end":  "6:00",
-                }
-            ]
-        }
-    },
-]
+data = {
+    "date": "2024-04-22",
+    "days": {
+        "0": [
+            {
+                "start": 9.0,
+                "duration":  1.5,
+            },
+            {
+                "start": 11.0,
+                "duration":  2.0,
+            }
+        ],
+        "1": [
+            {
+                "start": 14.0,
+                "duration":  3.0,
+            },
+            {
+                "start": 19.0,
+                "duration":  1.0,
+            }
+        ],
+        "2": [
+            {
+                "start": 10.0,
+                "duration":  1.0,
+            },
+            {
+                "start": 11.00,
+                "duration":  2.0,
+            },
+            {
+                "start": 14.0,
+                "duration":  5.0,
+            }
+        ],
+        "3": [],
+        "4": [
+            {
+                "start": 15.0,
+                "duration":  4.0,
+            }
+        ]
+    }
+}
 
 
 # iso format: YYYY-MM-DD"T"hh:mm:ss"+"{UTC-zone}
