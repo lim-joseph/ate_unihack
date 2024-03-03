@@ -9,7 +9,7 @@ export default function Event({
 }) {
 	return (
 		<li
-			className={`relative mt-px flex col-start-${colStart}`}
+			className={`relative mt-px flex col-start-${colStart} overflow-hidden`}
 			style={{ gridRow: `${gridRow1} / span ${span}` }}
 		>
 			<a
