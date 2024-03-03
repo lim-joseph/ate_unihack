@@ -1,4 +1,5 @@
 # ALLODATE+ <3
+Compare your Allocate+ timetables with your friends and find your matching downtime!
 
 ### Installation
 
