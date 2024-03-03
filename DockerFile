@@ -5,7 +5,7 @@ FROM python:3.8-slim
 WORKDIR /src/flask-server
 
 # Copy the requirements file into the container
-COPY requirements.txt .
+COPY req.txt .
 
 # Install the required Python packages
 RUN pip install -r req.txt
