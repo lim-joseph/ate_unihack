@@ -1,13 +1,15 @@
 import "../index.css";
 import { Button } from "@nextui-org/react";
 import Hearts from "../assets/hearts.png";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function HomeHero({ setShowTimetable, setData }) {
 	const input1Ref = useRef();
 	const input2Ref = useRef();
+	const [isFetching, setIsFetching] = useState(false);
 
 	function handleSubmit() {
+		setIsFetching(true);
 		const url =
 			"/data?ics-url1=" +
 			encodeURIComponent(input1Ref.current.value) +
@@ -21,6 +23,7 @@ export default function HomeHero({ setShowTimetable, setData }) {
 					if (typeof data === "object") setData(data);
 					// console.log(data);
 					setShowTimetable(true);
+					setIsFetching(false);
 				})
 				.catch((error) => console.error("Error fetching data:", error));
 		}
@@ -85,6 +88,7 @@ export default function HomeHero({ setShowTimetable, setData }) {
 					variant="solid"
 					className="drop-shadow-md mt-4"
 					onClick={handleSubmit}
+					isLoading={isFetching}
 				>
 					Allodate!
 				</Button>
