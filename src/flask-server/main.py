@@ -134,7 +134,10 @@ def main(url1, url2):
     person_a_dict = standardising(person_a)
     person_b_dict = standardising(person_b)
     
-    return comparison(person_a_dict,person_b_dict)
+    data = {   
+        "day":comparison(person_a_dict,person_b_dict)
+    }
+    return data
 
 
 def get_calendar(cal):
@@ -195,15 +198,18 @@ def standardising(freetime:list):
     return test_dict
 
 def comparison(person_a:dict,student_b:dict):
-    date_list = [0,1,2,3,4,5,6]
+    sameFreeTimeDict = {}
+    date_list = [0,1,2,3,4]
     for date in date_list:
         if person_a[date] != None and student_b[date] != None:
             final = sorted(set(person_a[date]).intersection(set(student_b[date])))
-            print(f"On this date: ({date}) you both are available during these times \n {final}")
+            sameFreeTimeDict[str(date)] = intervals_to_blocks(final)
+    return sameFreeTimeDict
+
 # # Testing
 # print(main("https://my-timetable.monash.edu/even/rest/calendar/ical/9cf97753-fcd9-4634-871d-de828696900e"))
 
 if __name__ == "__main__":
     url1 = "https://my-timetable.monash.edu/even/rest/calendar/ical/9cf97753-fcd9-4634-871d-de828696900e"
     url2 = "https://my-timetable.monash.edu/even/rest/calendar/ical/570d3a7c-5a14-4199-9b85-c906dda749e1"
-    main(url1,url2)
+    print(main(url1,url2))
