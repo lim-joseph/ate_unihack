@@ -1,13 +1,17 @@
 import sys
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 from flask import __version__ as flask_version
 from main import main
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../../build', static_url_path='/')
+
+@app.route('/')
+def index():
+    return send_from_directory(app.static_folder, 'index.html')
 
 
-@app.route("/")
-def hello():
+@app.route("/about")
+def about():
     return f"""Allodate+ backend :)<br>
             Python {sys.version}<br>
             Flask {flask_version}"""
