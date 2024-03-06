@@ -2,30 +2,63 @@ import "../index.css";
 import { Button } from "@nextui-org/react";
 import Hearts from "../assets/hearts.png";
 import { useRef, useState } from "react";
+import { delay } from "framer-motion";
 
 export default function HomeHero({ setShowTimetable, setData }) {
 	const input1Ref = useRef();
 	const input2Ref = useRef();
 	const [isFetching, setIsFetching] = useState(false);
+	const [statusList, setStatusList] = useState([]);
+
+	const statusDisplay = statusList.map((item) => {
+		return (
+			<div>&gt; {item}</div>
+		)
+	})
 
 	function handleSubmit() {
-		setIsFetching(true);
 		const url =
-			"/data?ics-url1=" +
-			encodeURIComponent(input1Ref.current.value) +
-			"&ics-url2=" +
-			encodeURIComponent(input2Ref.current.value);
+		"/data?ics-url1=" +
+		encodeURIComponent(input1Ref.current.value) +
+		"&ics-url2=" +
+		encodeURIComponent(input2Ref.current.value);
+		
+		// if (url) {
+		// 	fetch(url)
+		// 	.then((res) => res.json())
+		// 	.then((data) => {
+				// if (typeof data === "object") setData(data);
+				// setShowTimetable(true);
+				// setIsFetching(false);
+		// 	})
+		// 	.catch((error) => console.error("Error fetching data:", error));
+		// }
+		
+		setIsFetching(true);
+		setStatusList(["Sending request"])
+		
+		var eventSource = new EventSource(url)
+		
+		eventSource.addEventListener("info", (e) => {
+			setStatusList((statusList) => [...statusList, e.data])
+		});
 
-		if (url) {
-			fetch(url)
-				.then((res) => res.json())
-				.then((data) => {
-					if (typeof data === "object") setData(data);
-					setShowTimetable(true);
-					setIsFetching(false);
-				})
-				.catch((error) => console.error("Error fetching data:", error));
-		}
+		eventSource.addEventListener("response", (e) => {
+			eventSource.close()
+
+			console.log(e.data)
+
+			setData(JSON.parse(e.data));
+
+			// Delay it by 1 second just cuz
+			setTimeout(() => setShowTimetable(true), 500)});
+
+		eventSource.addEventListener("error", (e) => {
+			eventSource.close()
+			setIsFetching(false);
+
+			setStatusList((status) => [...status, e.data])
+		});
 	}
 
 	return (
@@ -38,14 +71,14 @@ export default function HomeHero({ setShowTimetable, setData }) {
 				/>
 			</div>
 
-			<div className="h-[40rem] w-full rounded-md relative flex flex-col items-center mt-[6rem] antialiased">
+			<div className="w-full rounded-md relative flex flex-col items-center mt-[6rem] antialiased">
 				<div className="max-w-2xl mx-auto p-4">
 					<h1 className="text-5xl md:text-7xl bg-clip-text text-pink-600 drop-shadow-md text-center font-sans font-bold">
 						No more lonely class breaks.
 					</h1>
 
 					<p></p>
-					<p className="text-neutral-600 text-l max-w-lg mx-auto mt-8 text-center relative z-10 drop-shadow-md">
+					<p className="text-gray-700 text-l max-w-lg mx-auto mt-8 text-center relative z-10 drop-shadow-md">
 						Copy the link at the bottom of your Allocate+ home page
 						and paste it below!
 					</p>
@@ -91,6 +124,10 @@ export default function HomeHero({ setShowTimetable, setData }) {
 				>
 					Allodate!
 				</Button>
+
+				<div className="w-full text-center text-gray-700 text-medium mt-4 font-mono">
+					{statusDisplay}
+				</div>
 			</div>
 		</div>
 	);

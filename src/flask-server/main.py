@@ -2,6 +2,7 @@ from ics import Calendar
 import requests
 from datetime import datetime, date, timedelta
 import numpy as np
+import json
 
 DISPLAY_WEEK = 1
 START_TIME = 8.0  # 8AM
@@ -120,18 +121,25 @@ def intervals_to_blocks(intervalList):
 
 
 def main(url1, url2):
-    # link from allocate+
-    cal = Calendar(requests.get(url1).text)
-    cal2 = Calendar(requests.get(url2).text)
+    try:
+        yield 'event: info\ndata: Loading first calendar\n\n'
+        cal1 = Calendar(requests.get(url1).text)
+        yield 'event: info\ndata: Loading second calendar\n\n'
+        cal2 = Calendar(requests.get(url2).text)
+    except Exception as e:
+        yield f'event: error\ndata: Error: {e}\n\n'
+        return
 
-    person_a = get_calendar(cal)
+    yield 'event: info\ndata: Processing calendars\n\n'
+    person_a = get_calendar(cal1)
     person_b = get_calendar(cal2)
 
     person_a_dict = standardising(person_a)
     person_b_dict = standardising(person_b)
 
     data = {"days": comparison(person_a_dict, person_b_dict)}
-    return data
+    yield 'event: info\ndata: {}\n\n'.format("Done")
+    yield f'event: response\ndata: {json.dumps(data)}\n\n'
 
 
 def get_calendar(cal):
