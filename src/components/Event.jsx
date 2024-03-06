@@ -1,4 +1,5 @@
 import { decimalTo12Hour } from "../utils";
+import { motion } from "framer-motion";
 
 export default function Event({
 	colStart,
@@ -7,13 +8,17 @@ export default function Event({
 	eventName,
 	startTime,
 }) {
+	const item = {
+		visible: { opacity: 1, y: 0 },
+  		hidden: { opacity: 0, y: 100 },
+	}
 	return (
-		<li
+		<motion.li
+			variants={item}
 			className={`relative mt-px flex col-start-${colStart} overflow-hidden`}
 			style={{ gridRow: `${gridRow1} / span ${span}` }}
 		>
-			<a
-				href="#"
+			<span
 				className="group absolute inset-1 flex flex-col overflow-hidden rounded-lg bg-pink-50 p-2 text-xs leading-5 hover:bg-pink-100"
 			>
 				<p className="order-1 font-semibold text-pink-700">
@@ -24,7 +29,7 @@ export default function Event({
 						{decimalTo12Hour(startTime)}
 					</time>
 				</p>
-			</a>
-		</li>
+			</span>
+		</motion.li>
 	);
 }

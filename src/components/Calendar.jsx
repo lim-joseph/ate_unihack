@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import Event from "./Event";
 import { durationToSpan, startTimeToGridRow } from "../utils.js";
+import { motion } from "framer-motion";
 
 export default function Calendar({ data }) {
 	const container = useRef(null);
@@ -18,8 +19,19 @@ export default function Calendar({ data }) {
 			1440;
 	}, []);
 
+	const list = {
+	visible: {
+		opacity: 1,
+		transition: {
+		when: "beforeChildren",
+		staggerChildren: 0.1,
+		},
+	},
+	hidden: { opacity: 0 },
+	}
+
 	return (
-		<div className="flex w-[80svw] mx-auto h-full flex-col mt-8">
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex w-[80svw] mx-auto h-full flex-col mt-8">
 			<h2 className="text-2xl bg-clip-text drop-shadow-md text-center font-sans font-bold mb-8">
 				You've been{" "}
 				<span className="px-2 text-4xl bg-clip-text text-pink-600 drop-shadow-md text-center font-sans font-bold">
@@ -187,7 +199,10 @@ export default function Calendar({ data }) {
 							</div>
 
 							{/* Events */}
-							<ol
+							<motion.ol
+								initial="hidden"
+								animate="visible"
+								variants={list}
 								className="col-start-1 col-end-2 row-start-1 grid grid-cols-1 sm:grid-cols-5 sm:pr-8"
 								style={{
 									gridTemplateRows:
@@ -217,11 +232,11 @@ export default function Calendar({ data }) {
 											);
 										});
 									})}
-							</ol>
+							</motion.ol>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 }

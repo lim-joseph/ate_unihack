@@ -127,7 +127,7 @@ def main(url1, url2):
         yield 'event: info\ndata: Loading second calendar\n\n'
         cal2 = Calendar(requests.get(url2).text)
     except Exception as e:
-        yield f'event: error\ndata: Error: {e}\n\n'
+        yield f'event: error\ndata: {e}\n\n'
         return
 
     yield 'event: info\ndata: Processing calendars\n\n'
@@ -138,6 +138,7 @@ def main(url1, url2):
     person_b_dict = standardising(person_b)
 
     data = {"days": comparison(person_a_dict, person_b_dict)}
+
     yield 'event: info\ndata: {}\n\n'.format("Done")
     yield f'event: response\ndata: {json.dumps(data)}\n\n'
 

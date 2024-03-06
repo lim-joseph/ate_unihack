@@ -2,19 +2,25 @@ import "../index.css";
 import { Button } from "@nextui-org/react";
 import Hearts from "../assets/hearts.png";
 import { useRef, useState } from "react";
-import { delay } from "framer-motion";
+import { motion } from "framer-motion";
 
 export default function HomeHero({ setShowTimetable, setData }) {
 	const input1Ref = useRef();
 	const input2Ref = useRef();
 	const [isFetching, setIsFetching] = useState(false);
-	const [statusList, setStatusList] = useState([]);
+	const [status, setStatus] = useState("");
+	const statusRef = useRef();
+	statusRef.current = status;
+	const [errorMessage, setErrorMessage] = useState("");
+	const [imageLoading, setImageLoading] = useState(true);
 
-	const statusDisplay = statusList.map((item) => {
-		return (
-			<div>&gt; {item}</div>
-		)
-	})
+	const imageLoaded = () => setImageLoading(false)
+
+	// const statusDisplay = statusList.map((item) => {
+	// 	return (
+	// 		<div>&gt; {item}</div>
+	// 	)
+	// })
 
 	function handleSubmit() {
 		const url =
@@ -34,44 +40,49 @@ export default function HomeHero({ setShowTimetable, setData }) {
 		// 	.catch((error) => console.error("Error fetching data:", error));
 		// }
 		
+		setStatus("Sending request")
+		setErrorMessage("")
 		setIsFetching(true);
-		setStatusList(["Sending request"])
 		
 		var eventSource = new EventSource(url)
 		
-		eventSource.addEventListener("info", (e) => {
-			setStatusList((statusList) => [...statusList, e.data])
+		eventSource.addEventListener("info", (event) => {
+			setStatus(event.data)
 		});
 
-		eventSource.addEventListener("response", (e) => {
+		eventSource.addEventListener("response", (event) => {
 			eventSource.close()
 
-			console.log(e.data)
+			console.log(event.data)
 
-			setData(JSON.parse(e.data));
+			setData(JSON.parse(event.data));
 
 			// Delay it by 1 second just cuz
 			setTimeout(() => setShowTimetable(true), 500)});
 
-		eventSource.addEventListener("error", (e) => {
+		eventSource.addEventListener("error", (event) => {
 			eventSource.close()
 			setIsFetching(false);
 
-			setStatusList((status) => [...status, e.data])
+			setErrorMessage("Error whilst " + statusRef.current.toLowerCase() + ": " + event.data)
 		});
 	}
 
 	return (
 		<div className="flex">
 			<div className="fixed flex w-full h-full justify-center items-center">
-				<img
+				<motion.img
+					initial={{ opacity: 0 }}
+					animate={{ opacity: imageLoading ? 0 : 1 }}
+					transition={({ opacity: { duration: 1 }})}
+					onLoad={imageLoaded}
 					src={Hearts}
 					alt=""
 					className="relative inset-0 object-cover z-0 blur-[10px] w-[1000px] top-[-6rem]"
 				/>
 			</div>
 
-			<div className="w-full rounded-md relative flex flex-col items-center mt-[6rem] antialiased">
+			<div className="w-full rounded-md relative flex flex-col items-center mt-[6rem] mb-8 antialiased">
 				<div className="max-w-2xl mx-auto p-4">
 					<h1 className="text-5xl md:text-7xl bg-clip-text text-pink-600 drop-shadow-md text-center font-sans font-bold">
 						No more lonely class breaks.
@@ -118,15 +129,15 @@ export default function HomeHero({ setShowTimetable, setData }) {
 				<Button
 					color="danger"
 					variant="solid"
-					className="drop-shadow-md mt-4"
+					className="drop-shadow-md mt-4 font-semibold"
 					onClick={handleSubmit}
 					isLoading={isFetching}
 				>
-					Allodate!
+					{!isFetching ? ("Allodate!") : (status)}
 				</Button>
 
-				<div className="w-full text-center text-gray-700 text-medium mt-4 font-mono">
-					{statusDisplay}
+				<div className="text-center mt-4 max-w-lg">
+					{errorMessage}
 				</div>
 			</div>
 		</div>
